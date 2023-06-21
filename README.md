@@ -92,7 +92,7 @@ proot-distro login ubuntu --shared-tmp
 
 #### Now you can start it.
 ```
-export PULSE_SERVER=127.0.0.1;env DISPLAY=:1 dbus-launch --exit-with-session
+export PULSE_SERVER=127.0.0.1;env DISPLAY=:1 dbus-launch --exit-with-session xfce4-session
 ```
 
 #### If you want to use it with your custom os,use this example start-distro.sh
