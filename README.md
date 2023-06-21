@@ -12,13 +12,13 @@ Termux:X11 is a fully fledged X server. It is built with Android NDK and optimiz
 This repo uses submodules. Use 
 
 ```
-~ $ git clone --recurse-submodules https://github.com/termux/termux-x11 
+git clone --recurse-submodules https://github.com/termux/termux-x11 
 ```
 or
 ```
-~ $ git clone https://github.com/termux/termux-x11
-~ $ cd termux-x11
-~ $ git submodule update --init --recursive
+git clone https://github.com/termux/termux-x11
+cd termux-x11
+git submodule update --init --recursive
 ```
 
 ## How does it work?
@@ -33,18 +33,37 @@ Or you can install nightly companion package from repositories with `pkg in x11-
 ## Running Graphical Applications
 You can start your desired graphical application by doing:
 ```
-~ $ termux-x11 :1 &
-~ $ env DISPLAY=:1 dbus-launch --exit-with-session xfce4-session
+termux-x11 :1 &
+env DISPLAY=:1 dbus-launch --exit-with-session xfce4-session
 ```
 or
 ```
-~ $ termux-x11 :1 -xstartup "dbus-launch --exit-with-session xfce4-session"
+termux-x11 :1 -xstartup "dbus-launch --exit-with-session xfce4-session"
 ```
 You may replace `xfce4-session` if you use other than Xfce
 
 `dbus-launch` does not work for some users so you can start session with
 ```
-~ $ termux-x11 :1 -xstartup "xfce4-session"
+termux-x11 :1 -xstartup "xfce4-session"
+```
+
+### Sound system
+
+#### Add this two lines to your shell
+```
+echo $SHELL
+```
+#### If your shell is zsh,add this two lines to your ~/.zshrc
+```
+echo "killall pulseaudio &>/dev/null" >>~/.zshrc
+
+echo "pulseaudio --start --exit-idle-time=-1; pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" >>~/.zshrc
+```
+#### If your shell is bash
+```
+echo "killall pulseaudio &>/dev/null" >>~/.bashrc
+
+echo "pulseaudio --start --exit-idle-time=-1; pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" >>~/.bashrc
 ```
 
 If you're done using Termux:X11 just simply exit it through it's notification drawer by expanding the Termux:X11 notification then "Exit"
@@ -55,6 +74,64 @@ If you plan to use the program with proot, keep in mind that you need to launch 
 If passing this option is not possible, set the TMPDIR environment variable to point to the directory that corresponds to /tmp in the target container.
 If you are using proot-distro you should know that it is possible to start `termux-x11` command from inside proot container.
 
+### Start Termux-x11 First,
+
+```
+termux-x11 :1 &
+```
+
+### Then,open another session and login to proot-distro.
+
+#### Example
+
+```
+proot-distro login ubuntu --shared-tmp
+```
+
+#### Now you can start it.
+```
+export PULSE_SERVER=127.0.0.1;env DISPLAY=:1 dbus-launch --exit-with-session
+```
+
+#### If you want to use it with your custom os,use this example start-distro.sh
+
+```
+#!/data/data/com.termux/files/usr/bin/bash
+cd $(dirname $0)
+## unset LD_PRELOAD in case termux-exec is installed
+unset LD_PRELOAD
+command="proot"
+command+=" --link2symlink"
+command+=" -0"
+command+=" -r ubuntu-fs"
+if [ -n "$(ls -A binds)" ]; then
+    for f in binds/* ;do
+      . $f
+    done
+fi
+command+=" -b /dev"
+command+=" -b /proc"
+command+=" -b /data/data/com.termux/files/usr/tmp"
+command+=" -b ubuntu-fs/root:/dev/shm"
+## uncomment the following line to have access to the home directory of termux
+#command+=" -b /data/data/com.termux/files/home:/root"
+## uncomment the following line to mount /sdcard directly to /
+command+=" -b $PREFIX/tmp/.X11-unix:/tmp/.X11-unix"
+command+=" -b /sdcard"
+command+=" -w /root"
+command+=" /usr/bin/env -i"
+command+=" HOME=/root"
+command+=" PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games"
+command+=" TERM=$TERM"
+command+=" LANG=C.UTF-8"
+command+=" /bin/bash --login"
+com="$@"
+if [ -z "$1" ];then
+    exec $command
+else
+    $command -c "$com"
+fi
+```
 ## Using with chroot environment
 If you plan to use the program with chroot or unshare, you must to run it as root and set the TMPDIR environment variable to point to the directory that corresponds to /tmp in the target container. 
 This directory must be accessible from the shell from which you launch termux-x11, i.e. it must be in the same SELinux context, same mount namespace, and so on.
@@ -65,6 +142,55 @@ export XKB_CONFIG_ROOT=/path/to/chroot/container/usr/share/xkb
 export TMPDIR=/path/to/chroot/container/tmp
 export CLASSPATH=/path/to/loader.apk
 /system/bin/app_process / com.termux.x11.Loader :0
+```
+
+### Another way to use termux-x11.Use this script after installing termux-sudo
+```
+apt-get update
+apt-get upgrade
+apt-get install git
+apt-get install tsu
+git clone https://gitlab.com/st42/termux-sudo
+
+cd termux-sudo
+
+cat sudo > /data/data/com.termux/files/usr/bin/sudo
+
+chmod 700 /data/data/com.termux/files/usr/bin/sudo
+```
+```
+#!/bin/bash
+if [ $# -eq 0 ]
+then
+        echo "Empty argument, use --help to see available arguments"
+elif [ $1 = "--start" ]
+then
+	unset LD_PRELOAD
+	export ROOTFSPATH=/data/local/nhsystem/kali-arm64
+	sudo mount -o remount,dev,suid /data
+	sudo mount proc -t proc $ROOTFSPATH/proc
+	sudo mount sys -t sysfs $ROOTFSPATH/sys
+	sudo mount --bind /dev $ROOTFSPATH/dev
+	sudo mount --bind /dev/pts $ROOTFSPATH/dev/pts
+	sudo mount --bind /sdcard $ROOTFSPATH/sdcard
+        echo "Starting Termux-x11..."
+        termux-x11 :0 &>/dev/null & pulseaudio -k &>/dev/null & pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1 &>/dev/null & sleep 1
+        sleep 3
+        echo ""
+        echo -e "Termux-x11 started"
+	sudo mount --bind $PREFIX/tmp/.X11-unix $ROOTFSPATH/tmp/.X11-unix
+	echo ""
+	echo "Starting ........"
+        echo ""
+	sudo chroot $ROOTFSPATH /bin/su -
+	sudo umount $ROOTFSPATH/proc
+	sudo umount $ROOTFSPATH/sys
+	sudo umount $ROOTFSPATH/dev/pts
+	sudo umount $ROOTFSPATH/dev
+	sudo umount $ROOTFSPATH/sdcard
+	sudo umount $ROOTFSPATH/tmp/.X11-unix
+#	pkill -f "app_process / com.termux.x11"
+fi
 ```
 
 ### Logs
