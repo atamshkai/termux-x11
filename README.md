@@ -65,7 +65,7 @@ echo "killall pulseaudio &>/dev/null" >>~/.bashrc
 
 echo "pulseaudio --start --exit-idle-time=-1; pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" >>~/.bashrc
 ```
-#### Then login again
+Then login again
 
 If you're done using Termux:X11 just simply exit it through it's notification drawer by expanding the Termux:X11 notification then "Exit"
 But you should pay attention that `termux-x11` command is still running and can not be killed this way.
