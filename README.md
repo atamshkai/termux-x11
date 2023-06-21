@@ -65,11 +65,13 @@ echo "killall pulseaudio &>/dev/null" >>~/.bashrc
 
 echo "pulseaudio --start --exit-idle-time=-1; pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" >>~/.bashrc
 ```
+#### Then login again
 
 If you're done using Termux:X11 just simply exit it through it's notification drawer by expanding the Termux:X11 notification then "Exit"
 But you should pay attention that `termux-x11` command is still running and can not be killed this way.
 
 ## Using with proot environment
+
 If you plan to use the program with proot, keep in mind that you need to launch proot/proot-distro with the --shared-tmp option. 
 If passing this option is not possible, set the TMPDIR environment variable to point to the directory that corresponds to /tmp in the target container.
 If you are using proot-distro you should know that it is possible to start `termux-x11` command from inside proot container.
@@ -145,6 +147,8 @@ export CLASSPATH=/path/to/loader.apk
 ```
 
 ### Another way to use termux-x11.Use this script after installing termux-sudo
+
+#### Sudo
 ```
 apt-get update
 apt-get upgrade
@@ -158,6 +162,9 @@ cat sudo > /data/data/com.termux/files/usr/bin/sudo
 
 chmod 700 /data/data/com.termux/files/usr/bin/sudo
 ```
+
+### Chroot script to use termux-x11
+
 ```
 #!/bin/bash
 if [ $# -eq 0 ]
