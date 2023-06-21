@@ -49,7 +49,7 @@ termux-x11 :1 -xstartup "xfce4-session"
 
 ### Sound system
 
-#### Add this two lines to your shell
+#### Check your shell
 ```
 echo $SHELL
 ```
