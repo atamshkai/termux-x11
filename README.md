@@ -146,7 +146,7 @@ export CLASSPATH=/path/to/loader.apk
 /system/bin/app_process / com.termux.x11.Loader :0
 ```
 
-### Another way to use termux-x11.Use this script after installing termux-sudo
+### Another way to use Termux:x11 with chroot environment.Use this script after installing termux-sudo
 
 #### Sudo
 ```
