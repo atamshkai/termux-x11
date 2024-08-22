@@ -274,7 +274,7 @@ Also you can start `termux-x11` with `-dpi` option.
 It is possible to use Termux:X11 with 3rd party apps.
 Check how `shell-loader/src/main/java/com/termux/x11/Loader.java` works.
 
-[Download](https://github.com/atamshkai/Ubuntu-18.04-KDE-Desktop-for-termux/raw/main/app-arm64-v8a-debug.apk
+[Download](https://github.com/termux/termux-x11/releases
 ) 
 
 # License
