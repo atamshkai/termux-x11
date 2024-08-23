@@ -167,7 +167,7 @@ export CLASSPATH=$(/system/bin/pm path com.termux.x11 | cut -d: -f2)
 
 ### Another way to use Termux:x11 with chroot environment.
 
-### Use this script after installing termux-sudo
+### Install termux-sudo
 
 #### Sudo
 ```
@@ -183,8 +183,6 @@ cat sudo > /data/data/com.termux/files/usr/bin/sudo
 
 chmod 700 /data/data/com.termux/files/usr/bin/sudo
 ```
-
-### Chroot script to use termux-x11
 
 #### Create a folder from termux if doesn't have it.
 
