@@ -168,13 +168,17 @@ chmod 700 /data/data/com.termux/files/usr/bin/sudo
 #### Create a folder from termux if it doesn't have
 
 ```
-mkdir ~/../usr/tmp/.X11-unix
+mkdir /data/data/com.termux/files/usr/tmp/.X11-unix
 ```
 
 #### Link to Linux Distro's tmp (Example with nethunter)
 
 ```
-ln -s .X11-unix /data/local/nhsystem/kali-arm64/tmp/.X11-unix
+tsu
+```
+
+```
+ln -s /data/data/com.termux/files/usr/tmp/.X11-unix /data/local/nhsystem/kali-arm64/tmp/.X11-unix
 ```
 
 ### Create a script in termux's bin
