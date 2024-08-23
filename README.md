@@ -189,6 +189,11 @@ ln -s /data/data/com.termux/files/usr/tmp/.X11-unix /data/local/nhsystem/kali-ar
 nano ~/../usr/bin/kangeli
 ```
 
+#### Give Permission
+```
+chmod +x ~/../usr/bin/kangeli
+```
+
 ### Add this to kangeli
 ```
 #!/bin/bash
