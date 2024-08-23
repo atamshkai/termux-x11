@@ -315,7 +315,7 @@ You can fix this in your window manager settings (in the case of xfce4 and lxqt 
 
 Also you can start `termux-x11` with `-dpi` option.
 ```
-~ $ termux-x11 :1 -xstartup "xfce4-session" -dpi 120
+~ $ termux-x11 :0 -xstartup "xfce4-session" -dpi 120
 ```
 
 ## Using with 3rd party apps
