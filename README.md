@@ -165,6 +165,27 @@ chmod 700 /data/data/com.termux/files/usr/bin/sudo
 
 ### Chroot script to use termux-x11
 
+#### Create a folder from termux if it doesn't have
+
+```
+mkdir ~/../usr/tmp/.X11-unix
+```
+
+#### Link to Linux Distro's tmp (Example with nethunter)
+
+```
+ln -s .X11-unix /data/local/nhsystem/kali-arm64/tmp/.X11-unix
+```
+
+### Create a script in termux's bin
+
+#### Example with nethunter
+
+```
+nano ~/../usr/bin/kangeli
+```
+
+### Add this to kangeli
 ```
 #!/bin/bash
 if [ $# -eq 0 ]
@@ -198,6 +219,24 @@ then
 	sudo umount $ROOTFSPATH/tmp/.X11-unix
 #	pkill -f "app_process / com.termux.x11"
 fi
+```
+
+#### Open Termux-x11 
+```
+termux-x11:1 &
+```
+
+#### Start Nethunter
+```
+tsu
+```
+
+```
+kangeli --start
+```
+
+```
+export DISPLAY=:0;dbus-launch --exit-with-session startxfce4
 ```
 
 ### Logs
