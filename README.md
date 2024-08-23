@@ -210,11 +210,6 @@ exit
 nano ~/../usr/bin/kangeli
 ```
 
-#### Give Permission
-```
-chmod +x ~/../usr/bin/kangeli
-```
-
 ### Add this to kangeli
 ```
 #!/bin/bash
@@ -249,6 +244,11 @@ then
 	sudo umount $ROOTFSPATH/tmp/.X11-unix
 #	pkill -f "app_process / com.termux.x11"
 fi
+```
+
+#### Give Permission
+```
+chmod +x ~/../usr/bin/kangeli
 ```
 
 #### Open Termux-x11 
