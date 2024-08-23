@@ -165,7 +165,7 @@ export CLASSPATH=$(/system/bin/pm path com.termux.x11 | cut -d: -f2)
 /system/bin/app_process / com.termux.x11.CmdEntryPoint :0
 ```
 
-### Another way to use Termux:x11 with chroot environment.
+### Another way to use Termux:x11 with Chroot Environment.
 
 ### Install termux-sudo
 
