@@ -264,7 +264,7 @@ kangeli --start
 ```
 
 ```
-export DISPLAY=:0;dbus-launch --exit-with-session startxfce4
+export PULSE_SERVER=127.0.0.1;export DISPLAY=:0;dbus-launch --exit-with-session startxfce4
 ```
 
 ### Force stopping X server (running in termux background, not an activity)
