@@ -79,7 +79,7 @@ If you are using proot-distro you should know that it is possible to start `term
 ### Start Termux-x11 First,
 
 ```
-termux-x11 :1 &
+termux-x11 :0 &
 ```
 
 ### Then,open another session and login to proot-distro.
