@@ -119,7 +119,9 @@ export PULSE_SERVER=127.0.0.1;env DISPLAY=:0 dbus-launch --exit-with-session xfc
 pkill -f com.termux.x11
 ```
 
-#### If you want to use it with your custom os,use this example start-distro.sh
+#### If you want to use Termux-X11 with your Custom OS,
+
+#### use this example start-distro.sh
 
 ```
 #!/data/data/com.termux/files/usr/bin/bash
