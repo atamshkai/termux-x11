@@ -165,7 +165,7 @@ chmod 700 /data/data/com.termux/files/usr/bin/sudo
 
 ### Chroot script to use termux-x11
 
-#### Create a folder from termux if it doesn't have
+#### Create a folder from termux if doesn't have
 
 ```
 mkdir /data/data/com.termux/files/usr/tmp/.X11-unix
