@@ -111,7 +111,12 @@ proot-distro login ubuntu --shared-tmp
 
 #### Now you can start it.
 ```
-export PULSE_SERVER=127.0.0.1;env DISPLAY=:0 dbus-launch --exit-with-session xfce4-session
+export PULSE_SERVER=127.0.0.1;env DISPLAY=:0 dbus-launch --exit-with-session xfce4-session &>/dev/null
+```
+
+#### Stop it.
+```
+pkill -f com.termux.x11
 ```
 
 #### If you want to use it with your custom os,use this example start-distro.sh
