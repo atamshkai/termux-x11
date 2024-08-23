@@ -33,18 +33,18 @@ Or you can install nightly companion package from repositories with `pkg in x11-
 ## Running Graphical Applications
 You can start your desired graphical application by doing:
 ```
-termux-x11 :1 &
-env DISPLAY=:1 dbus-launch --exit-with-session xfce4-session
+termux-x11 :0 &
+env DISPLAY=:0 dbus-launch --exit-with-session xfce4-session
 ```
 or
 ```
-termux-x11 :1 -xstartup "dbus-launch --exit-with-session xfce4-session"
+termux-x11 :0 -xstartup "dbus-launch --exit-with-session xfce4-session"
 ```
 You may replace `xfce4-session` if you use other than Xfce
 
 `dbus-launch` does not work for some users so you can start session with
 ```
-termux-x11 :1 -xstartup "xfce4-session"
+termux-x11 :0 -xstartup "xfce4-session"
 ```
 
 ### Sound system
@@ -92,7 +92,7 @@ proot-distro login ubuntu --shared-tmp
 
 #### Now you can start it.
 ```
-export PULSE_SERVER=127.0.0.1;env DISPLAY=:1 dbus-launch --exit-with-session xfce4-session
+export PULSE_SERVER=127.0.0.1;env DISPLAY=:0 dbus-launch --exit-with-session xfce4-session
 ```
 
 #### If you want to use it with your custom os,use this example start-distro.sh
@@ -206,7 +206,7 @@ then
 	sudo mount --bind /dev/pts $ROOTFSPATH/dev/pts
 	sudo mount --bind /sdcard $ROOTFSPATH/sdcard
         echo "Starting Termux-x11..."
-        termux-x11 :1 &>/dev/null & pulseaudio -k &>/dev/null & pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1 &>/dev/null & sleep 1
+        termux-x11 :0 &>/dev/null & pulseaudio -k &>/dev/null & pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1 &>/dev/null & sleep 1
         sleep 3
         echo ""
         echo -e "Termux-x11 started"
@@ -227,7 +227,7 @@ fi
 
 #### Open Termux-x11 
 ```
-termux-x11:1 &
+termux-x11:0 &
 ```
 
 #### Start Nethunter
