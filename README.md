@@ -165,7 +165,9 @@ export CLASSPATH=$(/system/bin/pm path com.termux.x11 | cut -d: -f2)
 /system/bin/app_process / com.termux.x11.CmdEntryPoint :0
 ```
 
-### Another way to use Termux:x11 with chroot environment.Use this script after installing termux-sudo
+### Another way to use Termux:x11 with chroot environment.
+
+### Use this script after installing termux-sudo
 
 #### Sudo
 ```
@@ -184,7 +186,7 @@ chmod 700 /data/data/com.termux/files/usr/bin/sudo
 
 ### Chroot script to use termux-x11
 
-#### Create a folder from termux if doesn't have
+#### Create a folder from termux if doesn't have it.
 
 ```
 mkdir /data/data/com.termux/files/usr/tmp/.X11-unix
@@ -195,9 +197,11 @@ mkdir /data/data/com.termux/files/usr/tmp/.X11-unix
 ```
 tsu
 ```
-
 ```
 ln -s /data/data/com.termux/files/usr/tmp/.X11-unix /data/local/nhsystem/kali-arm64/tmp/.X11-unix
+```
+```
+exit
 ```
 
 ### Create a script in termux's bin
