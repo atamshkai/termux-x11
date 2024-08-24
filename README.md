@@ -175,19 +175,23 @@ export CLASSPATH=$(/system/bin/pm path com.termux.x11 | cut -d: -f2)
 ### Another way to use Termux:x11 with Chroot Environment.
 
 ### Install termux-sudo
-
-#### Sudo
 ```
-apt-get update
-apt-get upgrade
-apt-get install git
-apt-get install tsu
+pkg up -y;pkg i -y git tsu
+```
+
+```
 git clone https://gitlab.com/st42/termux-sudo
+```
 
+```
 cd termux-sudo
+```
 
+```
 cat sudo > /data/data/com.termux/files/usr/bin/sudo
+```
 
+```
 chmod 700 /data/data/com.termux/files/usr/bin/sudo
 ```
 
@@ -311,7 +315,19 @@ mkdir /data/data/com.termux/files/usr/tmp/.X11-unix
 
 ### Then Open An Oridinary Termux-X11 Session.
 
-### Close termux-x11 and restart terminal again
+#### Example
+```
+termux-x11 :0 -xstartup 'dbus-launch --exit-with-session startxfce4' &>/dev/null
+```
+
+### Then,close termux-x11 and restart terminal again
+```
+pkill -f com.termux.x11
+```
+
+```
+exit
+```
 
 ### Force stopping X server (running in termux background, not an activity)
 
