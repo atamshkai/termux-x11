@@ -281,7 +281,9 @@ export PULSE_SERVER=127.0.0.1;export DISPLAY=:0;dbus-launch --exit-with-session 
 pkill -f com.termux.x11
 ```
 
-#### If you open rootfs with one more users,permission error will happen on /tmp/.X11-unix
+## WARNING
+
+#### If you open rootfs with one more users(nethunter & termux),permission error will happen on /tmp/.X11-unix
 
 #### Solve Cannot Open Display Error about Permissions
 
