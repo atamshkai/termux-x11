@@ -281,6 +281,36 @@ export PULSE_SERVER=127.0.0.1;export DISPLAY=:0;dbus-launch --exit-with-session 
 pkill -f com.termux.x11
 ```
 
+#### If you open rootfs with one more users,permission error will happen on /tmp/.X11-unix
+
+#### Solve Cannot Open Display Error about Permissions
+
+#### In nethunter terminal
+```
+rm -rf /tmp/.* /tmp/*
+```
+
+```
+mkdir /tmp/.X11-unix
+```
+
+```
+exit
+```
+
+#### Test also In termux's tmp.If it is red,delete it.
+```
+sudo rm -rf /data/data/com.termux/files/usr/tmp/.X11-unix
+```
+
+```
+mkdir /data/data/com.termux/files/usr/tmp/.X11-unix
+```
+
+### Then Open An Oridinary Termux-X11 Session.
+
+### Close termux-x11 and restart terminal again
+
 ### Force stopping X server (running in termux background, not an activity)
 
 termux-x11's X server runs in process with name "app_process", not "termux-x11". But you can kill it by searching "com.termux.x11" in commandline.
