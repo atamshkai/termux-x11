@@ -260,7 +260,7 @@ chmod +x ~/../usr/bin/kangeli
 
 #### Open Termux-x11 
 ```
-termux-x11:0 &
+termux-x11 :0 &
 ```
 
 #### Start Nethunter
