@@ -143,7 +143,7 @@ command+=" -b /data/data/com.termux/files/usr/tmp"
 command+=" -b ubuntu-fs/root:/dev/shm"
 ## uncomment the following line to have access to the home directory of termux
 #command+=" -b /data/data/com.termux/files/home:/root"
-## uncomment the following line to mount /sdcard directly to /
+## uncomment the following line to mount / directly to /android
 #command+=" -b /:/android"
 command+=" -b $PREFIX/tmp/.X11-unix:/tmp/.X11-unix"
 command+=" -b /sdcard"
